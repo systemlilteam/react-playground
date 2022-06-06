@@ -2,6 +2,8 @@ def add(num1,num2){
     return num1 + num2;
 }
 
+// test hook
+
 node{
     stage("gal"){
         if (add(3,3) > 5 )
