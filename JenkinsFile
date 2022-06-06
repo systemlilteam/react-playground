@@ -6,15 +6,21 @@ def add(num1,num2){
 
 node{
     stage("gal"){
-        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/galbirk/react-playground.git']]])
-        if (add(3,3) > 5 )
-        {
-            println("Big")
+        parallel linux: {
+            checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/galbirk/react-playground.git']]])
+            if (add(3,3) > 5 )
+            {
+                println("Big")
+            }
+            else
+            {
+                println("Small")
+            }
+            sh 'ls -la'
+        },
+        windows: {
+            sh 'pwd'
         }
-        else
-        {
-            println("Small")
-        }
-        sh 'ls -la'
+        
     }
 }
