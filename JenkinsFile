@@ -1,0 +1,26 @@
+def add(num1,num2){
+    return num1 + num2;
+}
+
+// test hook
+
+node{
+    stage("gal"){
+        parallel linux: {
+            checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/galbirk/react-playground.git']]])
+            if (add(3,3) > 5 )
+            {
+                println("Big")
+            }
+            else
+            {
+                println("Small")
+            }
+            sh 'ls -la'
+        },
+        windows: {
+            sh 'pwd'
+        }
+        
+    }
+}
